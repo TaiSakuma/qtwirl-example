@@ -28,8 +28,9 @@ reader_cfg = dict(
 results = qtwirl(
     file=input_files,
     reader_cfg=reader_cfg,
-    process=8,
-    max_events_per_process=50000
+    tree_name='Events',
+    process=16,
+    max_events_per_process=25000
 )
 
 print str(results)
