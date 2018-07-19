@@ -34,7 +34,7 @@ results = qtwirl(
 
 print str(results)
 expected = """
-[[         jet_pt      n   nvar
+[         jet_pt      n   nvar
 0     15.848932      3      3
 1     19.952623     12     12
 2     25.118864     74     74
@@ -56,7 +56,7 @@ expected = """
 18  1000.000000     26     26
 19  1258.925412      6      6
 20  1584.893192      2      2
-21  1995.262315      0      0]]
+21  1995.262315      0      0]
 """[1:-1]
 import difflib
 diff = difflib.unified_diff(expected, str(results))
