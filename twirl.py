@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # Tai Sakuma <tai.sakuma@gmail.com>
+import logging
+import socket
+
 import alphatwirl
 from qtwirl import qtwirl
 
@@ -10,9 +13,6 @@ import warnings
 warnings.filterwarnings('ignore', category=RuntimeWarning)
 
 ##__________________________________________________________________||
-input_files = [
-    '/Users/sakuma/work/cms/c180306_sample_nanoaod/store/mc/RunIISummer16NanoAOD/TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/NANOAODSIM/PUMoriond17_05Feb2018_94X_mcRun2_asymptotic_v2-v1/40000/445F90F0-DE12-E811-9889-00259021A0E2.root',
-    '/Users/sakuma/work/cms/c180306_sample_nanoaod/store/mc/RunIISummer16NanoAOD/TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/NANOAODSIM/PUMoriond17_05Feb2018_94X_mcRun2_asymptotic_v2-v1/40000/40898EE0-DE12-E811-BE6D-00226406A18A.root',
 def configure_logger(level='INFO'):
 
     level = logging.getLevelName(level)
@@ -30,7 +30,19 @@ def configure_logger(level='INFO'):
 
 configure_logger()
 
+##__________________________________________________________________||
+pfn_top = '/Users/sakuma/work/cms/c180306_sample_nanoaod/'
+hostname = socket.gethostname()
+if 'soolin' in hostname:
+    pfn_top = '/hdfs/dpm/phy.bris.ac.uk/home/cms/'
+
+##__________________________________________________________________||
+input_lfns = [
+    'store/mc/RunIISummer16NanoAOD/TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/NANOAODSIM/PUMoriond17_05Feb2018_94X_mcRun2_asymptotic_v2-v1/40000/445F90F0-DE12-E811-9889-00259021A0E2.root',
+    'store/mc/RunIISummer16NanoAOD/TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/NANOAODSIM/PUMoriond17_05Feb2018_94X_mcRun2_asymptotic_v2-v1/40000/40898EE0-DE12-E811-BE6D-00226406A18A.root',
 ]
+
+input_files = [pfn_top + p for p in input_lfns]
 
 RoundLog = alphatwirl.binning.RoundLog
 
