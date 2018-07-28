@@ -28,6 +28,8 @@ results = qtwirl(
     file=input_files,
     reader_cfg=reader_cfg,
     tree_name='Events',
+    parallel_mode='htcondor',
+    user_modules=('qtwirl', 'alphatwirl'),
     process=16,
     max_events_per_process=25000
 )
