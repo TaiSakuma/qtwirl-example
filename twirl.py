@@ -18,12 +18,11 @@ input_files = [
 RoundLog = alphatwirl.binning.RoundLog
 
 reader_cfg = dict(
-    summarizer=dict(
+    summarizer=[dict(
         keyAttrNames=('Jet_pt', ),
         binnings=(RoundLog(0.1, 100), ),
         keyOutColumnNames=('jet_pt', )
-    )
-)
+    )])
 
 results = qtwirl(
     file=input_files,
