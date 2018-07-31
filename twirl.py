@@ -46,20 +46,23 @@ input_files = [pfn_top + p for p in input_lfns]
 
 RoundLog = alphatwirl.binning.RoundLog
 
-reader_cfg = dict(
-    summarizer=[dict(
-        keyAttrNames=('Jet_pt', ),
-        binnings=(RoundLog(0.1, 100), ),
-        keyOutColumnNames=('jet_pt', )
-    )])
+reader_cfg = [dict(
+    keyAttrNames=('Jet_pt', ),
+    binnings=(RoundLog(0.1, 100), ),
+    keyOutColumnNames=('jet_pt', )
+)]
 
 results = qtwirl(
     file=input_files,
     reader_cfg=reader_cfg,
     tree_name='Events',
-    parallel_mode='htcondor',
+    # parallel_mode='htcondor',
+    dispatcher_options=dict(
+        job_desc_dict={
+            '+SingularityImage': '"/cvmfs/singularity.opensciencegrid.org/kreczko/workernode:centos6"',
+        }),
     user_modules=('qtwirl', 'alphatwirl'),
-    process=16,
+    process=16, quiet=False,
     max_events_per_process=25000
 )
 
