@@ -61,7 +61,6 @@ results = qtwirl(
         job_desc_dict={
             '+SingularityImage': '"/cvmfs/singularity.opensciencegrid.org/kreczko/workernode:centos6"',
         }),
-    user_modules=('qtwirl', 'alphatwirl'),
     process=16, quiet=False,
     max_events_per_process=25000
 )
