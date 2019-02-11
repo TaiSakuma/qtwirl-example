@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # Tai Sakuma <tai.sakuma@gmail.com>
+from __future__ import print_function
 import logging
 import socket
 
@@ -47,13 +48,13 @@ input_files = [pfn_top + p for p in input_lfns]
 RoundLog = alphatwirl.binning.RoundLog
 
 reader_cfg = [dict(
-    keyAttrNames=('Jet_pt', ),
-    binnings=(RoundLog(0.1, 100), ),
-    keyOutColumnNames=('jet_pt', )
+    key_name=('Jet_pt', ),
+    key_binning=(RoundLog(0.1, 100), ),
+    key_out_name=('jet_pt', )
 )]
 
 results = qtwirl(
-    file=input_files,
+    data=input_files,
     reader_cfg=reader_cfg,
     tree_name='Events',
     # parallel_mode='htcondor',
@@ -65,7 +66,7 @@ results = qtwirl(
     max_events_per_process=25000
 )
 
-print str(results)
+print(str(results))
 expected = """
 [         jet_pt      n   nvar
 0     15.848932      3      3
@@ -93,7 +94,7 @@ expected = """
 """[1:-1]
 import difflib
 diff = difflib.unified_diff(expected, str(results))
-print expected == str(results)
-print '\n'.join(list(diff))
+print(expected == str(results))
+print('\n'.join(list(diff)))
 
 ##__________________________________________________________________||
